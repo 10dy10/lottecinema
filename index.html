@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.1/swiper-bundle.min.js" integrity="sha512-v+pIzqEVf0+O50Ls9scw6DDZT5On6G5wnXLLMSjYlfJJrNe+ZCWK849PBUYQDagZKc2125WKYJY3XugLNwwPfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.3.1/swiper-bundle.css" integrity="sha512-UeEUffyTLOC2PrE2r82gwdSH2j7T/rsrfR/+px3YGJbib2RfLGOCYX4gSiMZhYxGOyw5gf3SqTzuaTlxs6E4Ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <title>롯데시네마</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        :root{font-family:'Roboto','Noto Sans KR', sans-serif;font-weight:300;font-size:14px;}
+
+        .clearfix::after{content:'';display:block;clear:both;}
+
+        .section{overflow:hidden;}
+        .wrap{overflow:hidden;}
+
+        /* skip-nav style */
+        .skip-nav a{position:fixed;left:0;right:0;top:-100%;z-index:99999;padding:0.7em 1em;background-color:#000;font-weight:500;color:#fff;text-align:center;z-index:9999;}
+        .skip-nav a:focus{top:0;}
+
+        .top-ad{background-color:rgb(247,247,247);}
+        .top-ad .img-box{width:980px;margin:0 auto;}
+
+        .header{width:100%;position:fixed;left:0;right:0;top:80px;z-index:999;background:linear-gradient(to bottom, rgba(29,29,31,1) 0%,rgba(0,0,0,0) 100%)}
+        .header.active{top:0;background:#fff;border-bottom:1px solid #333;}
+        .header-top{width:980px;margin:18px auto;display:flex;flex-flow:row nowrap;justify-content:space-between;}
+        .header-top.active{display:none;}
+        .header-top a{font-size:12px;color:rgb(235, 231, 231);}
+        .header-top .left-nav,.header-top .right-nav{width:40%;display:flex;align-items:flex-end;}
+        .left-nav ul li{margin-right:15px;}
+        .logo{width:20%}
+        .right-nav{justify-content:right;}
+        .right-nav ul li{margin-left:15px;}
+        .left-nav ul,.right-nav ul{display:flex;flex-flow:row nowrap;}
+        .header-bottom{width:980px;margin:0 auto;padding:15px 0;border-top:1px solid rgb(235, 231, 231);display:flex;}
+        .header-bottom a{color:#fff;}
+        .header-bottom a.active{color:#000;}
+        .center-nav>ul,.bottom-right-nav>ul{display:flex;flex-flow:row nowrap;justify-content:right;}
+        .center-nav{width:69.3877%;}
+        .center-nav>ul>li{margin-left:50px;}
+        .center-nav>ul>li>a{position:relative;}
+        .center-nav>ul>li>a:hover{border-bottom:2px solid #ff0000;}
+        .center-nav>ul>li>a::after{content:'';display:block;width:1px;height:10px;position:absolute;right:-25px;top:3px;background-color:#fff;}
+        .center-nav>ul>li>.last::after{display:none;}
+        .bottom-right-nav{width:30%;}
+        .bottom-right-nav>ul>li{margin-left:25px;}
+        .bottom-right-nav>ul>li:last-child{padding-top:3px;}
+
+
+        
+        .center-sub-nav{display:none;}
+
+        .back-slide{position:relative;}
+        .back-slide::after{content:'';display:block;height:140px;position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(29,29,31,1) 100%);z-index:999;}
+        .swiper01 img{height:770px;}
+        .swiper01 .swiper-button-prev,.swiper01 .swiper-button-next{top:45%;color:rgb(202, 199, 199);}
+        .time{padding:20px 0;background-color:#000;}
+        .time-container{width:980px;margin:0 auto;font-size:12px;text-align:right;color:#fff;}
+
+        .box-office{background-color:#000;}
+        .swiper02{width:1000px;margin:0 auto;overflow:hidden;}
+        .swiper-slide{position:relative;}
+        .poster{border-radius:6px;overflow:hidden;}
+        .rank{font-weight:900;font-size:30px;font-style:italic;position:absolute;left:10px;top:70%;color:#fff;}
+        .office05 .rank{top:89%;}
+        .movie-name,.percent,.star,.heart{color:#fff;}
+        .movie-name{margin-top:20px;text-align:center;}
+        .movie-info{display:flex;justify-content:center;}
+        
+    </style>
+</head>
+<body>
+    <section class="skip-nav">
+        <a href="#header">주메뉴 바로가기</a>
+        <a href="#special">본문 바로가기</a>
+    </section>
+    <section class="wrap">
+        <section class="top-ad">
+            <div class="img-box" id="ad01">
+                <a href="#"><img src="./images/top-ad.jpg" alt="킹스맨 퍼스트 에이전트 12월 대개봉"></a>
+                <!-- <button class="btn-close" id="btn-close"><i class="fas fa-times"></i></button> -->
+            </div>
+        </section>
+        <header class="header" id="header">
+            <div class="container header-container">
+                <div class="header-top">
+                    <div class="left-nav">
+                        <ul>
+                            <li><a href="#"><i class="fab fa-facebook"></i> 페이스북</a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i> 유튜브</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i> 인스타그램</a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i> 트위터</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo">
+                        <a href="./index.html"><img src="./images/logo.png" alt="logo"></a>
+                    </div>
+                    <div class="right-nav">
+                        <ul>
+                            <li><a href="#">멤버십</a></li>
+                            <li><a href="#">고객센터</a></li>
+                            <li><a href="#">로그인</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-bottom">
+                    <div class="center-nav">
+                        <ul>
+                            <li>
+                                <a href="#">예매</a>
+                                <ul class="center-sub-nav">
+                                    <li><a href="#">예매하기</a></li>
+                                    <li><a href="#">상영시간표</a></li>
+                                    <li><a href="#">할인안내</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">영화</a>
+                                <ul class="center-sub-nav">
+                                    <li><a href="#">현재상영작</a></li>
+                                    <li><a href="#">상영예정작</a></li>
+                                    <li><a href="#">아르떼</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">영화관</a>
+                                <ul class="center-sub-nav">
+                                    <li><a href="#">스페셜관</a></li>
+                                    <li><a href="#">서울</a></li>
+                                    <li><a href="#">경기/인천</a></li>
+                                    <li><a href="#">충청/대전</a></li>
+                                    <li><a href="#">전라/광주</a></li>
+                                    <li><a href="#">경북/대구</a></li>
+                                    <li><a href="#">경남/부산/울산</a></li>
+                                    <li><a href="#">강원</a></li>
+                                    <li><a href="#">제주</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">이벤트</a>
+                                <ul class="center-sub-nav">
+                                    <li><a href="#">영화</a></li>
+                                    <li><a href="#">시사회/무대인사</a></li>
+                                    <li><a href="#">HOT</a></li>
+                                    <li><a href="#">제휴할인</a></li>
+                                    <li><a href="#">우리동네영화관</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="last" href="#">스토어</a>
+                                <ul class="center-sub-nav">
+                                    <li><a href="#">베스트</a></li>
+                                    <li><a href="#">관람권</a></li>
+                                    <li><a href="#">스낵음료</a></li>
+                                    <li><a href="#">포토카드</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bottom-right-nav">
+                        <ul>
+                            <li><a href="#"><i class="far fa-user"></i> 회원가입</a></li>
+                            <li><a href="#"><i class="fas fa-ticket-alt"></i> 바로예매</a></li>
+                            <li><a href="#"><i class="fas fa-bars"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </header>
+        <section class="header-sub">
+            <div class="container header-sub-container">
+                <div class="back-slide">
+                    <div class="swiper01">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="./images/slide-banner0.jpg" alt="킹스맨"></div>
+                            <div class="swiper-slide"><img src="./images/slide-banner01.jpg" alt="캅샵"></div>
+                            <div class="swiper-slide"><img src="./images/slide-banner02.jpg" alt="매트릭스"></div>
+                            <div class="swiper-slide"><img src="./images/slide-banner03.jpg" alt="팬텀"></div>
+                            <div class="swiper-slide"><img src="./images/slide-banner04.jpg" alt="베네데타"></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-scrollbar"></div>
+                    </div>
+                </div>
+                <div class="time">
+                    <div class="container time-container">
+                        <i class="far fa-clock"></i>12.02 17:10 기준
+                    </div>
+                </div>
+                <div class="box-office">
+                    <div class="container box-office-container">
+                        <div class="swiper02">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide office01">
+                                    <div class="poster">
+                                        <img src="./images/box-office01.jpg" alt="고스트버스터즈">
+                                    </div>
+                                    <div class="rank">1</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">고스트버스터즈 라이즈</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 20.4%</div>
+                                            <div class="star"><i class="fas fa-star"></i>7</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office02">
+                                    <div class="poster">
+                                        <img src="./images/box-office02.jpg" alt="유체이탈자">
+                                    </div>
+                                    <div class="rank">2</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">유체이탈자</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 19.9%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.2</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office03">
+                                    <div class="poster">
+                                        <img src="./images/box-office03.jpg" alt="엔칸토">
+                                    </div>
+                                    <div class="rank">3</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">엔칸토:마법의 세계</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 14.7%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.8</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office04">
+                                    <div class="poster">
+                                        <img src="./images/box-office04.jpg" alt="연애 빠진 로맨스">
+                                    </div>
+                                    <div class="rank">4</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">연애 빠진 로맨스</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 11.1%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.5</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office05">
+                                    <div class="poster">
+                                        <img src="./images/box-office05.jpg" alt="현대카드M포인트">
+                                    </div>
+                                    <div class="rank">AD</div>
+                                </div>
+                                <div class="swiper-slide office06">
+                                    <div class="poster">
+                                        <img src="./images/box-office06.jpg" alt="고스트버스터즈">
+                                    </div>
+                                    <div class="rank">5</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">라스트 나잇 인 소호</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 7.9%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.4</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office07">
+                                    <div class="poster">
+                                        <img src="./images/box-office07.jpg" alt="베네데타">
+                                    </div>
+                                    <div class="rank">6</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">베네데타</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 6.1%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.4</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide office08">
+                                    <div class="poster">
+                                        <img src="./images/box-office08.jpg" alt="듄">
+                                    </div>
+                                    <div class="rank">7</div>
+                                    <div class="office-txt">
+                                        <div class="movie-name">듄</div>
+                                        <div class="movie-info">
+                                            <div class="percent">예매율 4.2%</div>
+                                            <div class="star"><i class="fas fa-star"></i>8.7</div>
+                                            <div class="heart"><i class="fab fa-gratipay"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <!-- <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div> -->
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <section class="special" id="special"></section>
+
+    </section>
+
+
+
+
+    <script>
+        $(window).scroll(function () {
+            var height = $(document).scrollTop();
+            // console.log(height);
+            if(height>=90){
+                $('.header').addClass('active');
+                $('.header-top').addClass('active');
+                $('.header-bottom a').addClass('active');
+            }else{
+                $('.header').removeClass('active');
+                $('.header-top').removeClass('active');
+                $('.header-bottom a').removeClass('active');
+            }
+        }); 
+
+        const swiper = new Swiper('.swiper01', {
+            // Optional parameters
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+        const swiper2 = new Swiper('.swiper02', {
+            // Optional parameters
+            loop: false,
+            slidesPerView: 5,
+            spaceBetween: 15,
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+    </script>
+</body>
+</html>
